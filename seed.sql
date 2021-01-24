@@ -1,14 +1,28 @@
-DROP DATABASE IF EXISTS Employee_Tracker;
+DROP DATABASE IF EXISTS Employee_Managament;
 
-CREATE DATABASE Employee_Tracker;
+CREATE DATABASE Employee_Managament;
 
-USE Employee_Tracker;
+USE Employee_Managament;
+
+-- Design the following database schema containing three tables:
+
+-- * **department**:
+
+--   * **id** - INT PRIMARY KEY
+--   * **name** - VARCHAR(30) to hold department name
 
 CREATE TABLE department(
 id integer auto_increment not null,
 name varchar(30) not null,
 primary key(id)
 );
+
+-- * **role**:
+
+--   * **id** - INT PRIMARY KEY
+--   * **title** -  VARCHAR(30) to hold role title
+--   * **salary** -  DECIMAL to hold role salary
+--   * **department_id** -  INT to hold reference to department role belongs to
 
 CREATE TABLE role(
 id integer auto_increment not null,
@@ -19,6 +33,13 @@ constraint fk_department_id foreign key (department_id) references department(id
 primary key(id)
 );
 
+-- * **employee**:
+
+--   * **id** - INT PRIMARY KEY
+--   * **first_name** - VARCHAR(30) to hold employee first name
+--   * **last_name** - VARCHAR(30) to hold employee last name
+--   * **role_id** - INT to hold reference to role employee has
+--   * **manager_id** - INT to hold reference to another employee that manages the employee being Created. This field may be null if the employee has no manager
 
 CREATE TABLE employee(
 id integer auto_increment not null,
@@ -31,9 +52,13 @@ constraint fk_manager_id FOREIGN KEY (manager_id) REFERENCES employee(id),
 Primary key(id)
 );
 
+-- Test department, role, and employee tables...
+
 select * from employee;
 select * from role;
 select * from department;
+
+-- Add dummy data to the department table...
 
 INSERT into department (name)
 VALUES ("Sales");
@@ -46,34 +71,54 @@ VALUES ("Legal");
 INSERT into department (name)
 VALUES ("Manager");
 
+-- Test deparment table...
+
 select * from department;
 
+-- Add dummy data to the role table...
+
 INSERT into role (title, salary, department_id)
-VALUES ("Sales Lead", 45000, 1);
+VALUES ("Sales Lead", 65000, 1);
 INSERT into role (title, salary, department_id)
-VALUES ("Salesperson", 35000, 1);
+VALUES ("Salesperson", 55000, 1);
 INSERT into role (title, salary, department_id)
-VALUES ("Lead Engineer", 43000, 2);
+VALUES ("Lead Engineer", 73000, 2);
 INSERT into role (title, salary, department_id)
-VALUES ("Accountant", 50000, 3);
+VALUES ("Accountant", 60000, 3);
 INSERT into role (title, salary, department_id)
-VALUES ("Legal", 50000, 4);
+VALUES ("Legal", 70000, 4);
 INSERT into role (title, salary, department_id)
-VALUES ("Manager", 65000, 5);
+VALUES ("Manager", 75000, 5);
+INSERT into role (title, salary, department_id)
+VALUES ("Gopher", 5000, 5);
+INSERT into role (title, salary, department_id)
+VALUES ("Flunkie", 5000, 5);
+INSERT into role (title, salary, department_id)
+VALUES ("Intern", 500, 2);
+
+-- Test the role table...
 
 select * from role;
 
+-- Add dummy data to employee table...
+
 INSERT into employee (first_name, last_name, role_id)
-values ("John", "Stamos", 3); 
+values ("Thewolf", "OfWallStreet", 1); 
 INSERT into employee (first_name, last_name, role_id)
-values ("Jim", "Baker", 4);
+values ("Kevin", "Flynn", 2);
 INSERT into employee (first_name, last_name, role_id)
-values ("George", "Washington", 5);
+values ("Itzhak", "Stern", 3); 
 INSERT into employee (first_name, last_name, role_id)
-values ("Meghan", "Kelly", 6);
+values ("Perry", "Mason", 4);
 INSERT into employee (first_name, last_name, role_id)
-values ("Tom", "Hanks", 7);
+values ("Boss", "Hogg", 5);
 INSERT into employee (first_name, last_name, role_id)
-values ("Dolly", "Parton", 8);
+values ("Tom", "Sawyer", 6);
+INSERT into employee (first_name, last_name, role_id)
+values ("Huck", "Finn", 7);
+INSERT into employee (first_name, last_name, role_id)
+values ("Bilbo", "Baggins", 8);
+
+-- Test employee table...
 
 select * from employee;
