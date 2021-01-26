@@ -1,12 +1,11 @@
-/* var inquirer = require("inquirer");
+var inquirer = require("inquirer");
+var mysql = require("mysql");
+// const mysql = require("mysql");
 var connection = require('./connection');
 
 /* * The command-line application should allow users to:
-
   * View departments, roles, employees
-  
   * Add departments, roles, employees
-
   * Update employee roles */
   
   const viewOptions = [
@@ -46,7 +45,7 @@ function runSearch() {
         .prompt({
             name: "action",
             type: "list",
-            message: "What would you like to do?",
+            message: "Please choose from the following options:",
             choices: viewOptions
         })
         .then(function (answer) {
@@ -157,14 +156,14 @@ function roleAdd() {
 } */
 
 // "Update Employee Roles"......................................................................................
-const updateEmployee = () => {
+const employeeUpdate = () => {
 
     function runUpdateSearch() {
         inquirer
             .prompt({
                 name: "action",
                 type: "list",
-                message: "Which employee do you want to update?",
+                message: "Which employee would you like to update?",
                 choices: employeeOptions
             })
     }
