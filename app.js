@@ -127,7 +127,7 @@ function addDepartments() {
           },
         ])
         .then(function (res) {
-          var query = connection.query(
+          connection.query(
             "INSERT INTO department SET ? ",
             {
               name: res.name,
@@ -168,7 +168,7 @@ function addRoles() {
           },
         ])
         .then(function (res) {
-          var query = connection.query(
+          connection.query(
             "INSERT INTO role SET ?",
             {
               title: res.title,
@@ -217,7 +217,7 @@ function addEmployees() {
         ])
 
         .then(function (res) {
-          var query = connection.query(
+          connection.query(
             "INSERT INTO employee SET ?",
             {
               first_name: res.first_name,
@@ -260,14 +260,10 @@ function updateEmployees() {
         ])
 
         .then(function (res) {
-          var query = connection.query(
-            "UPDATE employee SET ?",
-            {
-              last_name: res.last_name,
-            },
-            {
-              role_id: res.role_id,
-            },
+          connection.query(
+            "UPDATE employee SET role_id = ? WHERE last_name = ?",
+            [res.role_id, res.last_name],
+
             function (err) {
               if (err) throw err;
               console.table(res);
