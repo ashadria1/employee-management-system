@@ -134,36 +134,43 @@ function addDepartment() {
             function(err) {
                 if (err) throw err
                 console.table(res);
-                startPrompt();
+                showOptions();
             }
         )
     })
   }
 
 function addRole() { 
-  connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role",   function(err, res) {
+  connection.query("SELECT role.title AS title, role.salary AS salary, role.department_id AS department_id FROM role",   
+  function(err, res) {
     inquirer.prompt([
         {
-          name: "Title",
+          name: "title",
           type: "input",
-          message: "What is the roles Title?"
+          message: "What is the role's title?"
         },
         {
-          name: "Salary",
+          name: "salary",
           type: "input",
-          message: "What is the Salary?"
+          message: "What is the role's salary?"
+        }, 
+        {
+          name: "department_id",
+          type: "input",
+          message: "What is the Department ID?"
         } 
     ]).then(function(res) {
-        connection.query(
+      var query = connection.query(
             "INSERT INTO role SET ?",
             {
-              title: res.Title,
-              salary: res.Salary,
+              title: res.title,
+              salary: res.salary,
+              department_id: res.department_id
             },
             function(err) {
                 if (err) throw err
                 console.table(res);
-                startPrompt();
+                showOptions();
             }
         )
     });
@@ -207,7 +214,7 @@ function addEmployee() {
       }, function(err){
           if (err) throw err
           console.table(val)
-          startPrompt()
+          showOptions()
       })
   })
 }
@@ -252,7 +259,7 @@ function updateEmployee() {
         function(err){
             if (err) throw err
             console.table(val)
-            startPrompt()
+            showOptions()
         })
     });
   });
