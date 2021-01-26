@@ -95,6 +95,15 @@ function viewDepartment() {
     })
 }
 
+function viewRole() {
+    var sqlStr = "SELECT * FROM role";
+    connection.query(sqlStr, function (err, result) {
+        if (err) throw err;
+        console.table(result)
+        showOptions();
+    })
+}
+
 function viewEmployee() {
     var sqlStr = "SELECT * FROM employee ";
     sqlStr += "LEFT JOIN role ";
@@ -106,14 +115,6 @@ function viewEmployee() {
     })
 }
 
-function viewRole() {
-    var sqlStr = "SELECT * FROM role";
-    connection.query(sqlStr, function (err, result) {
-        if (err) throw err;
-        console.table(result)
-        showOptions();
-    })
-}
 
 // Adding functions......................................................
 
@@ -253,8 +254,6 @@ function updateEmployee() {
             console.table(val)
             startPrompt()
         })
-  
     });
   });
-      runUpdateSearch();  
 }; 
