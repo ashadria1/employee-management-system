@@ -270,7 +270,7 @@ function updateEmployees() {
             },
             function (err) {
               if (err) throw err;
-              console.table(val);
+              console.table(res);
               showOptions();
             }
           );
