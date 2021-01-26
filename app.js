@@ -43,8 +43,7 @@ function showOptions() {
     })
     .then(function (answer) {
       switch (answer.action) {
-
-          case viewOptions[0]:
+        case viewOptions[0]:
           viewDepartments();
           break;
 
@@ -88,7 +87,7 @@ function viewDepartments() {
     console.table(result);
     showOptions();
   });
-};
+}
 
 function viewRoles() {
   var sqlStr = "SELECT * FROM role";
@@ -97,7 +96,7 @@ function viewRoles() {
     console.table(result);
     showOptions();
   });
-};
+}
 
 function viewEmployees() {
   var sqlStr = "SELECT * FROM employee ";
@@ -108,37 +107,41 @@ function viewEmployees() {
     console.table(result);
     showOptions();
   });
-};
+}
 
 // Adding functions......................................................
 
 //Add Departments ........................
 
 function addDepartments() {
-  connection.query("SELECT department.id AS department_id, department.name AS department_name FROM department",
-  function (err, res) {
-  inquirer
-    .prompt([
-      {
-        name: "name",
-        type: "input",
-        message: "What is the name of the department you would like to add?",
-      },
-    ])
-    .then(function (res) {
-      var query = connection.query(
-        "INSERT INTO department SET ? ",
-        {
-          name: res.name,
-        },
-        function (err) {
-          if (err) throw err;
-          console.table(res);
-          showOptions();
-        }
-      );
-    });
-})};
+  connection.query(
+    "SELECT department.id AS department_id, department.name AS department_name FROM department",
+    function (err, res) {
+      inquirer
+        .prompt([
+          {
+            name: "name",
+            type: "input",
+            message:
+              "What is the name of the department you would like to add?",
+          },
+        ])
+        .then(function (res) {
+          var query = connection.query(
+            "INSERT INTO department SET ? ",
+            {
+              name: res.name,
+            },
+            function (err) {
+              if (err) throw err;
+              console.table(res);
+              showOptions();
+            }
+          );
+        });
+    }
+  );
+}
 
 //Add Roles ........................
 
@@ -181,7 +184,7 @@ function addRoles() {
         });
     }
   );
-};
+}
 
 //Add Employees ........................
 
@@ -190,45 +193,48 @@ function addEmployees() {
     "SELECT employee.first_name AS first_name, employee.last_name AS last_name, employee.role_id AS role_id, employee.manager_id AS manager_id FROM employee",
     function (err, res) {
       inquirer
-      .prompt([
-      {
-        name: "first_name",
-        type: "input",
-        message: "Enter the new employee's first name: ",
-      },
-      {
-        name: "last_name",
-        type: "input",
-        message: "Enter the new employee's last name: ",
-      },
-       {
-        name: "role_id",
-        type: "input",
-        message: "What is the new employee's role ID? ",
-      }, 
-       {
-        name: "manager_id",
-        type: "input",
-        message: "What is the new employee's manager ID? ",
-       }])
+        .prompt([
+          {
+            name: "first_name",
+            type: "input",
+            message: "Enter the new employee's first name: ",
+          },
+          {
+            name: "last_name",
+            type: "input",
+            message: "Enter the new employee's last name: ",
+          },
+          {
+            name: "role_id",
+            type: "input",
+            message: "What is the new employee's role ID? ",
+          },
+          {
+            name: "manager_id",
+            type: "input",
+            message: "What is the new employee's manager ID? ",
+          },
+        ])
 
-       .then(function (res) {
-        var query = connection.query(
-        "INSERT INTO employee SET ?",
-        {
-          first_name: res.first_name,
-          last_name: res.last_name,
-          role_id: res.role_id,
-          manager_id: res.manager_id,
-        },
-        function (err) {
-          if (err) throw err;
-          console.table(res);
-          showOptions();
-        }
-      );
-    });
-})};
+        .then(function (res) {
+          var query = connection.query(
+            "INSERT INTO employee SET ?",
+            {
+              first_name: res.first_name,
+              last_name: res.last_name,
+              role_id: res.role_id,
+              manager_id: res.manager_id,
+            },
+            function (err) {
+              if (err) throw err;
+              console.table(res);
+              showOptions();
+            }
+          );
+        });
+    }
+  );
+}
 
 // Update Employee Roles ................................................................
 
@@ -236,7 +242,6 @@ function updateEmployees() {
   connection.query(
     "SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;",
     function (err, res) {
-      // console.log(res)
       if (err) throw err;
       console.log(res);
       inquirer
@@ -244,18 +249,19 @@ function updateEmployees() {
           {
             name: "last_name",
             type: "input",
-            message: "Enter the last name of the employee you would like to update: ",
+            message:
+              "Enter the last name of the employee you would like to update: ",
           },
           {
             name: "role_id",
             type: "input",
             message: "What is the employee's new role ID? ",
-          }, 
-            ])
-   
-         .then(function (res) {
+          },
+        ])
+
+        .then(function (res) {
           var query = connection.query(
-            "UPDATE employee SET WHERE ?",
+            "UPDATE employee SET ?",
             {
               last_name: res.last_name,
             },
@@ -271,4 +277,4 @@ function updateEmployees() {
         });
     }
   );
-  }
+}
