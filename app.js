@@ -1,6 +1,4 @@
 var inquirer = require("inquirer");
-var mysql = require("mysql");
-// const mysql = require("mysql");
 var connection = require('./connection');
 
 /* * The command-line application should allow users to:
@@ -49,15 +47,6 @@ function runSearch() {
             choices: viewOptions
         })
         .then(function (answer) {
-/* 
-            const viewOptions = [
-                "View Departments",
-                "View Roles",
-                "View Employees",
-                "Add Departments",
-                "Add Roles",
-                "Add Employees",
-                "exit" */
 
                 switch (answer.action) {
                 case viewOptions[0]:
@@ -105,6 +94,7 @@ function departmentView() {
         runSearch();
     })
 }
+
 function employeeView() {
     var sqlStr = "SELECT * FROM employee ";
     sqlStr += "LEFT JOIN role ";
@@ -115,6 +105,7 @@ function employeeView() {
         runSearch();
     })
 }
+
 function roleView() {
     var sqlStr = "SELECT * FROM role";
     connection.query(sqlStr, function (err, result) {
@@ -123,7 +114,6 @@ function roleView() {
         runSearch();
     })
 }
-
 
 // Adding functions......................................................
 
@@ -137,6 +127,7 @@ function departmentAdd() {
         runSearch();
     })
 }
+
 function employeeAdd() {
     var sqlStr = "SELECT * FROM employee ";
     sqlStr += "LEFT JOIN role ";
@@ -148,6 +139,7 @@ function employeeAdd() {
         runSearch();
     })
 }
+
 function roleAdd() {
     var sqlStr = "SELECT * FROM role";
     connection.query(sqlStr, function (err, result) {
