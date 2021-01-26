@@ -95,6 +95,8 @@ function runSearch() {
         })
 }
 
+// Viewing functions......................................................
+
 function departmentView() { 
     var sqlStr = "SELECT * FROM department";
     connection.query(sqlStr, function (err, result) {
@@ -124,6 +126,7 @@ function roleView() {
 
 
 // Adding functions......................................................
+
 /* 
 function departmentAdd() {
     var sqlStr = "SELECT * FROM department";
@@ -155,7 +158,8 @@ function roleAdd() {
     })
 } */
 
-// "Update Employee Roles"......................................................................................
+// "Update Employee Roles"................................................................
+
 const employeeUpdate = () => {
 
     function runUpdateSearch() {
