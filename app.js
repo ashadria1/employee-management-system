@@ -43,16 +43,7 @@ function showOptions() {
     })
     .then(function (answer) {
       switch (answer.action) {
-/* 
-        "View Departments",
-        "View Roles",
-        "View Employees",
-        "Add Departments",
-        "Add Roles",
-        "Add Employees",
-        "Update Employee Roles",
-        "exit",
- */
+
           case viewOptions[0]:
           viewDepartments();
           break;
@@ -65,23 +56,23 @@ function showOptions() {
           viewEmployees();
           break;
 
-        case viewOptions[4]:
+        case viewOptions[3]:
           addDepartments();
           break;
 
-        case viewOptions[5]:
+        case viewOptions[4]:
           addRoles();
           break;
 
-        case viewOptions[6]:
+        case viewOptions[5]:
           addEmployees();
           break;
 
-        case viewOptions[7]:
+        case viewOptions[6]:
           updateEmployees();
           break;
 
-        case viewOptions[8]:
+        case viewOptions[7]:
           connection.end();
           break;
       }
@@ -97,7 +88,7 @@ function viewDepartments() {
     console.table(result);
     showOptions();
   });
-}
+};
 
 function viewRoles() {
   var sqlStr = "SELECT * FROM role";
@@ -106,7 +97,7 @@ function viewRoles() {
     console.table(result);
     showOptions();
   });
-}
+};
 
 function viewEmployees() {
   var sqlStr = "SELECT * FROM employee ";
@@ -117,9 +108,11 @@ function viewEmployees() {
     console.table(result);
     showOptions();
   });
-}
+};
 
 // Adding functions......................................................
+
+//Add Departments ........................
 
 function addDepartments() {
   connection.query("SELECT department.id AS department_id, department.name AS department_name FROM department",
@@ -145,7 +138,9 @@ function addDepartments() {
         }
       );
     });
-}
+})};
+
+//Add Roles ........................
 
 function addRoles() {
   connection.query(
@@ -186,7 +181,9 @@ function addRoles() {
         });
     }
   );
-});
+};
+
+//Add Employees ........................
 
 function addEmployees() {
   connection.query(
@@ -209,43 +206,14 @@ function addEmployees() {
         type: "input",
         message: "What is the new employee's role ID? ",
       }, 
-/*    Could call a function here...
-      name: "role_id",
-      type: "list",
-      message: "What is their role? ",
-      choices: selectRole(), */
-      
-      {
-        name: "department_id",
+       {
+        name: "manager_id",
         type: "input",
-        message: "What is the new employee's department ID? ",
-      }, 
-      
-      /* {
-        name: "choice",
-        type: "rawlist",
-        message: "Whats their managers name?",
-        choices: selectManager(),
-      }, 
-      
-          .then(function (res) {
-          var query = connection.query(
-            "INSERT INTO role SET ?",
-            {
-              title: res.title,
-              salary: res.salary,
-              department_id: res.department_id,
-            },
-            function (err) {
-              if (err) throw err;
-              console.table(res);
-              showOptions();
-            }
-    
-      */
-    ])
-    .then(function (val) {
-      var query = connection.query(
+        message: "What is the new employee's manager ID? ",
+       }])
+
+       .then(function (res) {
+        var query = connection.query(
         "INSERT INTO employee SET ?",
         {
           first_name: res.first_name,
@@ -255,14 +223,14 @@ function addEmployees() {
         },
         function (err) {
           if (err) throw err;
-          console.table(val);
+          console.table(res);
           showOptions();
         }
       );
     });
-}
+})};
 
-// "Update Employee Roles"................................................................
+// Update Employee Roles ................................................................
 
 function updateEmployees() {
   connection.query(
@@ -275,32 +243,24 @@ function updateEmployees() {
         .prompt([
           {
             name: "last_name",
-            type: "rawlist",
-            choices: function () {
-              var lastName = [];
-              for (var i = 0; i < res.length; i++) {
-                last_name.push(res[i].last_name);
-              }
-              return last_name;
-            },
-            message: "What is the employee's last name? ",
+            type: "input",
+            message: "Enter the last name of the employee you would like to update: ",
           },
           {
-            name: "role",
-            type: "rawlist",
-            message: "What is the employee's new title? ",
-            choices: selectRole(),
-          },
-        ])
-        .then(function (val) {
-          var roleId = selectRole().indexOf(val.role) + 1;
-          connection.query(
+            name: "role_id",
+            type: "input",
+            message: "What is the employee's new role ID? ",
+          }, 
+            ])
+   
+         .then(function (res) {
+          var query = connection.query(
             "UPDATE employee SET WHERE ?",
             {
-              last_name: val.last_name,
+              last_name: res.last_name,
             },
             {
-              role_id: role_id,
+              role_id: res.role_id,
             },
             function (err) {
               if (err) throw err;
@@ -311,4 +271,4 @@ function updateEmployees() {
         });
     }
   );
-  })}}
+  }
