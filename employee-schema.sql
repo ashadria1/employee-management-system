@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS Employee_Management;
+DROP DATABASE IF EXISTS employee_management;
 
-CREATE DATABASE Employee_Management;
+CREATE DATABASE employee_management;
 
-USE Employee_Management;
+USE employee_management;
 
 -- Design the following database schema containing three tables:
 
