@@ -21,9 +21,13 @@ This application aims to create an interface that makes it easy for non-develope
 3.  Open a new terminal in VSCode and enter the following commands, pausing between each command until the npm packages completely install:
 
 **npm init -y**
+
 **npm install**
+
 **npm install inquirer**
+
 **npm install mysql**
+
 **node app.js**
 
 ## Database Design ##
@@ -58,28 +62,10 @@ I want to be able to view and manage the departments, roles, and employees in my
 So that I can organize and plan my business
 ```
 
-
-## Minimum Requirements
-
-* Functional application.
-
-* GitHub repository with a unique name and a README describing the project.
-
-* The command-line application should allow users to:
-
-  * Add departments, roles, employees
-
-  * View departments, roles, employees
-
-  * Update employee roles
-
 ## Resources
 
-You are required to submit the following:
-
 * The URL of the GitHub repository:
-
-
+https://github.com/ashadria1/employee-management-system
 
 * A video demonstrating the entirety of the app's functionality:
-
+![Employee Management System Demo](Assets\Employee-Management-System-Demo.wmv)
