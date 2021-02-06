@@ -67,7 +67,7 @@ So that I can organize and plan my business
 * The URL of the GitHub repository:
 https://github.com/ashadria1/employee-management-system
 
-
+* A GIF of the application in action:
 ![Employee Management System Demo](Assets/Employee-Management-System-Demo.gif)
 
 * A video demonstrating the entirety of the app's functionality (mp4):
