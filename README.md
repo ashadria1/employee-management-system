@@ -71,10 +71,6 @@ https://github.com/ashadria1/employee-management-system
 
 https://github.com/ashadria1/employee-management-system/blob/main/Assets/emp-mgt-demo.mp4?raw=true
 
-![Employee Management System Demo](Assets/emp-mgt-demo.mp4)
-
 * Another video demonstrating the entirety of the app's functionality (wmv):
 
 https://github.com/ashadria1/employee-management-system/blob/main/Assets/Employee-Management-System-Demo.wmv?raw=true
-
-![Employee Management System Demo](Assets/Employee-Management-System-Demo.wmv)
