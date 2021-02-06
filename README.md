@@ -68,4 +68,4 @@ So that I can organize and plan my business
 https://github.com/ashadria1/employee-management-system
 
 * A video demonstrating the entirety of the app's functionality:
-![Employee Management System Demo](Assets/emp-mgt-demo.mp4?raw=true)
+![Employee Management System Demo](Assets/emp-mgt-demo.MP4)
